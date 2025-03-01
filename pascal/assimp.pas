@@ -1012,7 +1012,7 @@ type
 
 function aiGetImporterDesc(extension: PChar): PaiImporterDesc; cdecl; external;
 
-{ These import functions are used to load a model aka a scene }
+{ These import functions are used to load a model. aka a scene }
 
 function aiImportFile(pFile: PChar; pFlags: Cardinal = aiProcess_Default): PaiScene; cdecl; external;
 function aiImportFileEx(pFile: PChar; pFlags: Cardinal; pFS: PaiFileIO): PaiScene; cdecl; external;

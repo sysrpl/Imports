@@ -1012,7 +1012,7 @@ type
 
 function aiGetImporterDesc(extension: PChar): PaiImporterDesc; cdecl; external;
 
-{ These import functions are used to load a model aka scene }
+{ These import functions are used to load a model aka a scene }
 
 function aiImportFile(pFile: PChar; pFlags: Cardinal = aiProcess_Default): PaiScene; cdecl; external;
 function aiImportFileEx(pFile: PChar; pFlags: Cardinal; pFS: PaiFileIO): PaiScene; cdecl; external;
@@ -1020,7 +1020,7 @@ function aiImportFileExWithProperties(pFile: PChar; pFlags: Cardinal; pFS: PaiFi
 function aiImportFileFromMemory(pBuffer: PChar; pLength: Cardinal; pFlags: Cardinal; pHint: PChar): PaiScene; cdecl; external;
 function aiImportFileFromMemoryWithProperties(pBuffer: PChar; pLength: Cardinal; pFlags: Cardinal; pHint: PChar; pProps: PaiPropertyStore): PaiScene; cdecl; external;
 
-{ Release a previously imported loaded model }
+{ Release a previously loaded model }
 
 procedure aiReleaseImport(pScene: PaiScene); cdecl; external;
 

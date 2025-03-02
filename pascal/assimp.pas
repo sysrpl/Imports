@@ -31,7 +31,8 @@ type
 { aiList<T> provides a clearer way to access pointers to arrays }
 
   aiList<T> = record
-    items: array[0..MaxInt] of T;
+  public
+    item: array[0..MaxInt] of T;
   end;
 
 const
@@ -785,8 +786,10 @@ type
   aiMesh = record
     mPrimitiveTypes, mNumVertices, mNumFaces: Cardinal;
     mVertices, mNormals, mTangents, mBitangents: ^aiList<aiVector3D>;
-    mColors: array[0..7] of PaiColor4D;
-    mTextureCoords: array[0..7] of PaiVector3D;
+    mColors: array[0..7] of ^aiList<aiColor4D>;
+    mTextureCoords: array[0..7] of ^aiList<aiVector3D>;
+    //mColors: array[0..7] of PaiColor4D;
+    //mTextureCoords: array[0..7] of PaiVector3D;
     mNumUVComponents: array[0..7] of Cardinal;
     mFaces: ^aiList<aiFace>;
     mNumBones: Cardinal;
@@ -1250,20 +1253,22 @@ function aiGetMaterialTexture(
 
 implementation
 
+{ aiList }
+
 {$ifdef linux}
 	{.$define static}
   {$ifdef static}
-    {$linklib libassimp.a}
-    {$l z}
-    {$l stdc++}
-    {$l m}
-    {$l gcc_s}
+    {$l libassimp.a}
+    {$linklib z}
+    {$linklib stdc++}
+    {$linklib m}
+    {$linklib gcc_s}
   {$else}
-		{$l libassimp.so}
+		{$linklib 'libassimp.so.5'}
 	{$endif}
 {$endif}
 {$ifdef windows}
-		{$l libassimp.dll}
+		{$linklib libassimp.dll}
 {$endif}
 
 { aiString }
@@ -1277,7 +1282,4 @@ begin
 end;
 
 end.
-
-
-
 
